@@ -14,7 +14,7 @@ most event software tries to keep your data forever. We don't. We believe in sof
 
 ## The lifecycle
 
-The application flow is designed to be linear and destructive
+The application flow is designed to be linear and ephemeral
 
 1. An admin requests an event. The server spins up a dedicated sqlite (i love SQLite fhjdafsadjlkfasjlk) database and emails a magic link (main form of auth for now)
 2. The team manages the event in real-time using the various dashboards, each dedicated to a separate task/responsibilities
@@ -65,8 +65,8 @@ A built-in tool to handle the hype ;3
 
 ## Technical vision
 
-* **Frontend:** Vue.js (I love it more than my parents love me)
-* **Backend:** Rust ([AETHER](https://github.com/ENIX1701/AETHER) is written mostly in Rust, and I think it's also the most sensible here)
+* **Frontend:** Vue.js (I hate frontend)
+* **Backend:** Rust (Actix + SeaORM + JWT middleware)
 * **Database:** SQLite, one file per event, can't get any simpler, can it?
 
 ## Conclusion
