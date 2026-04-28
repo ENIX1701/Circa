@@ -31,7 +31,7 @@ Circa 2026
   - [ ] frontend
   - [ ] deploy healthchecks or smth?
 - [ ] prepare the deploy
-  - [ ] dockerfiles -> turns out I can just build the backend that will server static frontend files itself??? no need for two dockerfiles and the compose :D!
+  - [x] dockerfiles -> turns out I can just build the backend that will server static frontend files itself??? no need for two dockerfiles and the compose :D!
     - ~~[ ] front~~
     - ~~[ ] back~~
     - ~~[ ] main compose~~
