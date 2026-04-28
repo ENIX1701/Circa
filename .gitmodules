@@ -1,6 +1,6 @@
 [submodule "backend"]
 	path = backend
-	url = git@github.com:ENIX1701/Circa-backend.git
+	url = https://github.com/ENIX1701/Circa-backend.git
 [submodule "frontend"]
 	path = frontend
-	url = git@github.com:ENIX1701/Circa-frontend.git
+	url = https://github.com/ENIX1701/Circa-frontend.git
