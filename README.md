@@ -22,6 +22,7 @@ Circa 2026
   - the styling needs to be more consistent (hence no image background anymore)
 
 ### TODO
+
 - [x] parametrizable color theme (frontend event branding)
 - [x] inbox view
 - [x] event register form
@@ -30,18 +31,18 @@ Circa 2026
   - [x] backend
   - [x] frontend
   - [x] deploy healthchecks or smth? -> heroku does these :)
-- [ ] prepare the deploy
+- [x] prepare the deploy
   - [x] dockerfiles -> turns out I can just build the backend that will server static frontend files itself??? no need for two dockerfiles and the compose :D!
     - ~~[ ] front~~
     - ~~[ ] back~~
     - ~~[ ] main compose~~
   - [x] server infra (heroku/digitalocean/gcp/hetzner/?) -> heroku
   - [x] DNS
-  - [ ] manual tests?
-    - [ ] fix the spa quirks...
-  - [ ] readmes
-    - [ ] backend
-    - [ ] frontend
-  - [ ] test accounts
-  - [ ] ship message (info + guide)
+  - [x] manual tests?
+    - [x] fix the spa quirks...
+- [ ] readmes
+  - [ ] backend
+  - [ ] frontend
+- [ ] test accounts
+- [ ] ship message (info + guide)
 - [ ] user walkthrough? like some interactive tutorial thingy? many people wanted that in AETHER
