@@ -28,16 +28,17 @@ Circa 2026
 - [x] event lifecycle management (create -> edit -> destroy)
 - [ ] unit tests (>:C)
   - [x] backend
-  - [ ] frontend
-  - [ ] deploy healthchecks or smth?
+  - [ ] frontend -> in progress
+  - [x] deploy healthchecks or smth? -> heroku does these :)
 - [ ] prepare the deploy
   - [x] dockerfiles -> turns out I can just build the backend that will server static frontend files itself??? no need for two dockerfiles and the compose :D!
     - ~~[ ] front~~
     - ~~[ ] back~~
     - ~~[ ] main compose~~
-  - [ ] server infra (heroku/digitalocean/gcp/hetzner/?) -> heroku
+  - [x] server infra (heroku/digitalocean/gcp/hetzner/?) -> heroku
   - [ ] DNS
   - [ ] manual tests?
+    - [ ] fix the spa quirks...
   - [ ] readmes
     - [ ] backend
     - [ ] frontend
