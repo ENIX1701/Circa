@@ -1,5 +1,7 @@
 build:
   docker:
     web: Dockerfile
+  config:
+    VITE_AUTH_DELIVERY_NODE: outbox
 run:
   web: /app/circa_backend

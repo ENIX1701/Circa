@@ -1,5 +1,8 @@
 FROM node:22-bookworm-slim AS frontend
 
+ARG VITE_AUTH_DELIVERY_MODE=outbox
+ENV VITE_AUTH_DELIVERY_MODE=$VITE_AUTH_DELIVERY_MODE
+
 WORKDIR /app/frontend
 
 COPY frontend/package*.json ./
