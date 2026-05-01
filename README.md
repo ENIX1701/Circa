@@ -6,6 +6,13 @@ Create an event, invite the people who need access, run the operation, export wh
 
 Clean, focused, and temporary by design.
 
+> [!IMPORTANT]
+> Demo accounts:  
+> `maya.chen@circa.demo` **[owner]** - best all around :3  
+> `oliver.grant@circa.demo` **[organizer]**  
+> `sofia.marin@circa.demo` **[staff]**  
+> `grace.kim@circa.demo` **[volunteer]**  
+
 ## Components
 
 Circa is split into two layers, wired together by the root deployment image.
