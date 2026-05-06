@@ -6,7 +6,6 @@ services:
     restart: unless-stopped
     command:
       - --log.level=INFO
-      - --accesslog=true
       - --providers.docker=true
       - --providers.docker.exposedbydefault=false
       - --providers.docker.network=circa-public
@@ -24,6 +23,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - traefik-letsencrypt:/letsencrypt
+    security_opt:
+      - no-new-privileges:true
     networks:
       - public
 
@@ -34,6 +35,14 @@ services:
       args:
         VITE_AUTH_DELIVERY_MODE: ${VITE_AUTH_DELIVERY_MODE:-outbox}
     restart: unless-stopped
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
     environment:
       APP_ENV: production
       PORT: 8080
@@ -47,9 +56,12 @@ services:
       - traefik.enable=true
       - traefik.http.routers.circa.rule=Host(`${CIRCA_DOMAIN:?set CIRCA_DOMAIN}`)
       - traefik.http.routers.circa.entrypoints=websecure
+      - traefik.http.routers.circa.middlewares=circa-ratelimit@docker
       - traefik.http.routers.circa.tls=true
       - traefik.http.routers.circa.tls.certresolver=letsencrypt
       - traefik.http.services.circa.loadbalancer.server.port=8080
+      - traefik.http.middlewares.circa-ratelimit.ratelimit.average=30
+      - traefik.http.middlewares.circa-ratelimit.ratelimit.burst=60
     networks:
       - public
 
