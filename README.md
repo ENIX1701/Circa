@@ -178,7 +178,7 @@ npm run build
 
 ## Deployment
 
-Heroku deployment is configured through `heroku.yml` and the root `Dockerfile`.
+Hetzner/VPS deployment is configured through `compose.prod.yml`, which runs the root `Dockerfile` behind Traefik with automatic Let's Encrypt certificates.
 
 The image uses:
 - `node:24-bookworm-slim` for frontend build

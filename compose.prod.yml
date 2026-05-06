@@ -1,0 +1,62 @@
+name: circa
+
+services:
+  traefik:
+    image: traefik:v3
+    restart: unless-stopped
+    command:
+      - --log.level=INFO
+      - --accesslog=true
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --providers.docker.network=circa-public
+      - --entrypoints.web.address=:80
+      - --entrypoints.websecure.address=:443
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --certificatesresolvers.letsencrypt.acme.email=${LETSENCRYPT_EMAIL:?set LETSENCRYPT_EMAIL}
+      - --certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge=true
+      - --certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-letsencrypt:/letsencrypt
+    networks:
+      - public
+
+  circa:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_AUTH_DELIVERY_MODE: ${VITE_AUTH_DELIVERY_MODE:-outbox}
+    restart: unless-stopped
+    environment:
+      APP_ENV: production
+      PORT: 8080
+      DATABASE_URL: sqlite:///data/circa.db?mode=rwc
+      JWT_SECRET: ${JWT_SECRET:?set JWT_SECRET}
+      FRONTEND_URL: https://${CIRCA_DOMAIN:?set CIRCA_DOMAIN}
+      AUTH_DELIVERY_MODE: ${AUTH_DELIVERY_MODE:-outbox}
+    volumes:
+      - circa-data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.circa.rule=Host(`${CIRCA_DOMAIN:?set CIRCA_DOMAIN}`)
+      - traefik.http.routers.circa.entrypoints=websecure
+      - traefik.http.routers.circa.tls=true
+      - traefik.http.routers.circa.tls.certresolver=letsencrypt
+      - traefik.http.services.circa.loadbalancer.server.port=8080
+    networks:
+      - public
+
+networks:
+  public:
+    name: circa-public
+
+volumes:
+  circa-data:
+  traefik-letsencrypt:
